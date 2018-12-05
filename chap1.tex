@@ -1,0 +1,42 @@
+ \chapter{\textsc {Analyse et calcul d'une loi de commande par retour d'état} }
+ %\chaptermark{\textsc {Analyse et calcul d'une loi de commande par retour d'état}}
+ 
+	\section{\textsc {Commandabilité du modèle linéarisé}} 
+ 	
+ 	\paragraph{}
+ 		Calcul de la matrice de commandabilité $Co=\begin{bmatrix} B&BA&A^{2}B \end{bmatrix} $:
+ 		
+ 		\begin{center}
+			
+			$Co$=$\begin{bmatrix}
+			64.9351&-0.5975&0.0110\\
+			0&0.5975&-0.0173\\
+			0&0&0.0064
+			\end{bmatrix}$	
+			 			
+		\end{center} 		 
+		
+		La matrice de commandabilité est triangulaire supérieure ce qui fait que son rang vaut 3 car il n'éxiste aucune relation linéaire entre ses colonnes ou entre ses lignes.\\
+		\textbf{Conclusion:} Le modèle linéarisé est bien commandable vu que le rang de la matrice $Co$ est égale au nombre de valeurs propres que possède la matrice dynamique $A$. 
+		
+		\section{\textsc {La loi de commande par retour d'état}} 
+		
+		\begin{center}
+		%\includegraphics[scale=0.4]{bobb.png} 
+		\captionof{figure}{\textit Schéma SIMULINK du système en boucle fermée avec retour d'état}
+		\label{fig1}
+		\end{center}
+		
+		\paragraph{}
+			Afin de calculer les paramètres du retour d'état soit le gain matriciel $K$ et le pré-compensateur $N$ nous devons choisir des valeurs pour les pôles désirés $P_{des}=\begin{pmatrix} P_1 & P_2 & P_3 \end{pmatrix} $ qui respectent les spécificités du cahier des charges.\\
+		
+		\paragraph{} Du cours de SLI2 on trouve que le temps de réponse $t_r =\frac{3}{|Re(vp)|} $ avec $vp$ : valeur propre et vu qu'une spécificité dit que $t_r \leqslant 90s$ alors on trouve:\\
+		
+		\begin{center}
+				
+				$t_r =\frac{3}{|Re(vp)|}\leqslant 90 $\\[1cm]
+				$\Rightarrow|Re(vp)| \geqslant \frac{3}{90} \simeq 0.033 $\\[1cm]
+				$\Rightarrow Re(vp) \geqslant 0.033 \wedge Re(vp) \leqslant -0.033$
+		\end{center}
+		Si $\Rightarrow Re(vp) \geqslant 0.033$ alors notre système est instable, donc la plus lente valeur propre autrement appelée mode dominant doit être inférieur ou égal à $-0.033$.\\\\
+		Nous choisissons alors les valeurs désirés suivantes $P_{des}=\begin{bmatrix} -0.033&-0.15&-0.12 \end{bmatrix} $
