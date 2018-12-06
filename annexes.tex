@@ -57,4 +57,37 @@ K=acker(A,B,P);
 Abf=A-B*K;
 N=1/(C*inv(-Abf)*B);
 	\end{lstlisting}		
+	
+\chapter*{Annexe D}
+	\addcontentsline{toc}{chapter}{Annexe D}		
+	
+	Code MATLAB qui calcule la matrice d'observabilité,\label{Annexe D} \hyperref[OBSV]{Retour vers section 2.1.1}
+	
+	\begin{lstlisting}	
+OBSV=obsv(sys);
+rang_OBSV=rank(OBSV);
+	\end{lstlisting}		
+	
+	
+	\chapter*{Annexe E}
+	\addcontentsline{toc}{chapter}{Annexe E}		
+	
+	Code MATLAB qui calcule les élements de l'observateur,\label{Annexe E} \hyperref[calobs]{Retour vers section 2.1.2}
+	
+	\begin{lstlisting}	
+B1= B(1);
+B2= [B(2);B(3)];
 
+A11= A(1,1);
+A21= [A(2,1);A(3,1)];
+A22= [A(2,2) A(2,3);A(3,2) A(3,3)]; 
+A12= [A(1,2) A(1,3)];   
+
+G= acker(A22',A12',[5*P2])';
+
+F= A22-(G*A12);
+
+Gtilde= F*G-G*A11+A21;
+   
+Htilde= B2-G*B1;
+	\end{lstlisting}	

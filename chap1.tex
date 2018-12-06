@@ -1,5 +1,5 @@
- \chapter{\textsc {Analyse et calcul d'une loi de commande par retour d'état} }
- %\chaptermark{\textsc {Analyse et calcul d'une loi de commande par retour d'état}}
+\chapter{\textsc {Analyse et calcul d'une loi de commande par retour d'état} }
+ \chaptermark{\textsc {Analyse et calcul d'une loi de commande par retour d'état}}
  
 	\section{\textsc {Commandabilité du modèle linéarisé}} 
  	
@@ -18,7 +18,7 @@
 		
 		La matrice de commandabilité est triangulaire supérieure ce qui fait que son rang vaut 3 car il n'éxiste aucune relation linéaire entre ses colonnes ou entre ses lignes,\label{Co} \hyperref[Annexe A]{voir Annexe A.}\\
 		
-		\textbf{Conclusion:} Le modèle linéarisé est bien commandable vu que le rang de la matrice $Co$ est égale au nombre de valeurs propres que possède la matrice dynamique $A$. 
+		\textbf{Conclusion:} Le modèle linéarisé est bien commandable vu que le rang de la matrice $Co$ est égale au nombre de valeurs propres que possède la matrice $(PI_d-A)$. 
 		
 		\section{\textsc {La loi de commande par retour d'état}} 
 		
@@ -52,14 +52,14 @@
 		\end{center}
 		Si $\Rightarrow Re(vp) \geqslant 0.033$ alors notre système est instable, donc la plus lente valeur propre autrement appelée mode dominant doit être inférieur ou égal à $-0.033$.\\\\
 		
-		Nous choisissons alors les valeurs désirés suivantes: $P_{des}= \begin{bmatrix} P_1&P_2&P_3\end{bmatrix}=\begin{bmatrix} -0.033&-0.15&-0.12 \end{bmatrix} $. Afin de calculer le gain matriciel $K=\begin{bmatrix} K_1 & K_2 & K_3 \end{bmatrix}$ il faut impérativement que le polynôme caractéristique:$ \Psi(A-BK)= \Psi(P_{des})$, autrement dit: $det(A-BK)=(P-P_1)(P-P_2)(P-P_3)$, on trouve:\\
+		Nous choisissons alors les valeurs désirés suivantes: $P_{des}= \begin{bmatrix} P_1&P_2&P_3\end{bmatrix}=\begin{bmatrix} -0.033&-0.15&-0.12 \end{bmatrix} $. Afin de calculer le gain matriciel $K=\begin{bmatrix} K_1 & K_2 & K_3 \end{bmatrix}$ il faut impérativement que le polynôme caractéristique:$ \Psi(A-BK)= \Psi(P_{des})$, autrement dit: $det(PI_d-(A-BK))=(P-P_1)(P-P_2)(P-P_3)$, on trouve:\\
 		
 		\begin{center}
 					
-			$\Psi(A-BK)$=\\$\Psi(A_{BF})$=$\begin{vmatrix}
-			-0.009202-64.93506K_1&0.009202-64.93506K_2&-64.93506K_3\\
-			0.009202&-0.019831&0.010629\\
-			 0.000000&0.010629&-0.048646
+			$\psi(A-BK)$=\\$\Psi(A_{BF})$=$\begin{vmatrix}
+			P+0.009202+64.93506K_1&-0.009202-64.93506K_2&64.93506K_3\\
+			-0.009202&P+0.019831&-0.010629\\
+			 0.000000&-0.010629&P+0.048646
 			\end{vmatrix}$\\[1.5cm]
 			
 			$\Psi(P_{des})=(P+0.033)(P+0.15)(P+0.12)$			
@@ -69,5 +69,18 @@
 		\paragraph{} Par identification on trouve que $K=\begin{bmatrix} 0.0035&0.0170&-0.0141\end{bmatrix}$ la valeur du gain matriciel du retour d'état,\label{K} \hyperref[Annexe B]{voir Annexe B.}\\
 		
 		\paragraph{} On sait que: $N=\frac{1}{C(-A+BK)^{-1}B+D}$ on obtient au final: $N=0.0108$,\label{N} \hyperref[Annexe C]{Voir Annexe C.}
+		
+		\begin{center}
+		%\includegraphics[scale=0.4]{bobb.png} 
+		\captionof{figure}{\textit Tracé de $q_1(t)$}
+		\label{fig2}
+		\end{center}
+		
+		\begin{center}
+		%\includegraphics[scale=0.4]{bobb.png} 
+		\captionof{figure}{\textit Tracé de $h_1(t)$}
+		\label{fig3}
+		\end{center}
+		\textbf{Remarque:} 
 		
 		

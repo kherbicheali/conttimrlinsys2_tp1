@@ -1,0 +1,70 @@
+\chapter{\textsc {Implémentation de la loi de commande} }
+ \chaptermark{\textsc {Implémentation de la loi de commande}}
+
+	\section{\textsc {Calcul d'un observateur minimal identité}} 
+	 \subsection{\textsc {Observabilité du modèle linéarisé}} 
+	 
+	 \paragraph{}
+ 		Calcul de la matrice d'observabilité $OBSV=\begin{bmatrix} C\\CA\\CA^{2} \end{bmatrix} $:
+ 		
+ 		\begin{center}
+			
+			$OBSV$=$\begin{bmatrix}
+			1&0&0\\
+			-0.0092&0.0092&0\\
+			0.00017&-0.00027&0.001
+			\end{bmatrix}$	
+					 			
+		\end{center} 		
+				
+		La matrice d'observabilité est triangulaire inférieure ce qui fait que son rang vaut 3 car il n'éxiste aucune relation linéaire entre ses colonnes ou entre ses lignes,\label{OBSV} \hyperref[Annexe D]{voir Annexe D.}\\
+		
+		\textbf{Conclusion:} Le modèle linéarisé est bien observable vu que le rang de la matrice $OBSV$ est égale au nombre de valeurs propres que possède la matrice $(PI_d-A)$. 
+		
+	 \subsection{\textsc {Calcul de l'observateur minimal identité}}
+	 
+	 \paragraph{} Le but de cet observateur est de recontsruire les états non mesurables\\
+	  $\widehat{h}(t)=\begin{bmatrix} \widehat{h_2}\\ \widehat{h_3} \end{bmatrix}$ tel que: $\widehat{h_2}\rightarrow h_2$ et $\widehat{h_3}\rightarrow h_3$.\\ 
+	 
+	 Du cours de SLI2 on a:
+	 
+	 \begin{center}
+	 $\dot s(t)= F s(t) +(FG-GA_{11}+A_{21})y(t)+(B_2-GB_1)u(t)$\\[0.25cm]
+	 $\widehat{x}(t)=s(t)+Gy(t)$\\[0.25cm]
+	 Ici: $\widehat{x}(t)=\widehat{h}(t) \quad y(t)=h_1(t) \quad u(t)=q_1(t)$
+	 \end{center}
+	 	
+	Avec:
+
+		\begin{center}
+			
+			$A_{11}= -0.009202 \quad A_{12}=\begin{bmatrix} 0.009202&0 \end{bmatrix} \quad A_{21}=\begin{bmatrix} 0.009202\\0 \end{bmatrix} \quad A_{22}= \begin{bmatrix} -0.019831 & 0.010629\\0.010629 & -0.048646 \end{bmatrix} $\\[0.5cm]
+			$B_1=64.93506 \quad B_2=\begin{bmatrix} 0\\0 \end{bmatrix}$\\[0.25cm]
+			$G= \begin{bmatrix} g_1\\g_2 \end{bmatrix}$\\[0.25cm]
+			$F=A_{22}-GC$\\[0.25cm]
+			$\tilde{G}= FG-GA_{11}+A_{21}$\\[0.25cm]
+			$\tilde{H}= B_2-GB_1$
+			
+		\end{center}
+		
+		\paragraph{} Comme pour calculer le gain $K$, les valeurs du gain $G$ et celles de la nouvelle matrice dynamique $F$ vont être calculées en respectant l'équivalence: $ \Psi(F)= \Psi(P_{des})$ ou $ \Psi(A_{22}-GC)= \Psi(P_{des})$. N'oublions pas que l'observateur admet un temps de réponse 5 fois plus rapide que celui du système bouclé par retour d'état alors: $ P{des} = \begin{bmatrix} 5P_2&5P_3 \end{bmatrix}$. \label{calobs} \hyperref[Annexe E]{Voir Annexe E}, on trouve:
+		
+		\begin{center}
+		
+			$G= \begin{bmatrix} 139.30\\3954.60 \end{bmatrix} \quad F=A_{22}-GC= \begin{bmatrix} -1.301670&0.010629\\-36.379600&-0.048646 \end{bmatrix}$	\\[0.25cm]
+			$\tilde{G}= \begin{bmatrix} -138\\-5223.66 \end{bmatrix} \quad \tilde{H}= \begin{bmatrix} -9.0455 \times 10^{3} \\ -2.5679 \times 10^{5} \end{bmatrix}  $
+		
+		\end{center}
+		
+		A la fin nous aurons: 
+		
+		\begin{center}
+	 $\dot s(t)= \begin{bmatrix} -1.301670&0.010629\\-36.379600&-0.048646 \end{bmatrix} s(t) + \begin{bmatrix} -138\\-5223.66 \end{bmatrix} h_1(t)+ \begin{bmatrix} -9.0455 \times 10^{3} \\ -2.5679 \times 10^{5} \end{bmatrix} q_1(t)$\\[0.25cm]
+	 $\widehat{h}(t)=s(t)+ \begin{bmatrix} 139.30\\ 3954.60 \end{bmatrix} h_1(t)$\\[0.25cm]
+	 \end{center}
+	 
+	 \begin{center}
+		%\includegraphics[scale=0.4]{bobb.png} 
+		\captionof{figure}{\textit Schéma bloc SIMULINK avec observateur}
+		\label{fig4}
+		\end{center}
