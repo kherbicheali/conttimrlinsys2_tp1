@@ -91,3 +91,19 @@ Gtilde= F*G-G*A11+A21;
    
 Htilde= B2-G*B1;
 	\end{lstlisting}	
+
+
+\chapter*{Annexe F}
+	\addcontentsline{toc}{chapter}{Annexe F}		
+	
+	Code MATLAB qui calcule les élements de l'observateur 2,\label{Annexe F} \hyperref[calobs2]{Retour vers section 2.2.2}
+	
+	\begin{lstlisting}
+G2= acker(A22',A12',[2*P2])';
+
+F2= A22-(G2*A12);
+
+Gtilde2= F2*G2-G2*A11+A21;
+   
+Htilde2= B2-G2*B1;
+	\end{lstlisting}	

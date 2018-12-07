@@ -63,8 +63,87 @@
 	 $\widehat{h}(t)=s(t)+ \begin{bmatrix} 139.30\\ 3954.60 \end{bmatrix} h_1(t)$\\[0.25cm]
 	 \end{center}
 	 
-	 \begin{center}
-		%\includegraphics[scale=0.4]{bobb.png} 
+	    \begin{center}
+		\includegraphics[scale=0.35]{observateurSIMU.PNG} 
 		\captionof{figure}{\textit Schéma bloc SIMULINK avec observateur}
 		\label{fig4}
 		\end{center}
+		
+		\subsection{\textsc {Convergence des états estimés vers les états réels}}
+		
+		\begin{center}
+		\includegraphics[scale=0.5]{question4.PNG} 
+		\captionof{figure}{\textit Courbes d'évolution temporelle des états estimés et les états réels sous SIMULINK}
+		\label{fig5}
+		\end{center}
+		
+		\paragraph{} Les courbes $h_2(t)$ et $\widehat{h_2}(t)$ sont identiques, de même pour $h_3(t)$ et $\widehat{h_3}(t)$ donc il n'existe pas d'erreur de convergence en boucle ouverte lorsque les hauteurs initiales sont non nulles. 
+		
+		\subsection{\textsc {Evaluation de l’influence des conditions initiales de l’état de l’observateur}}
+
+		
+		\paragraph{} On prend des conditions initiales de l'observateur de sorte qu'elles soient 50 fois plus grandes que la v	aleur de la consigne.
+		
+				
+		\begin{center}
+		\includegraphics[scale=0.4]{sortiecondi.PNG} 
+		\captionof{figure}{\textit Evolution de la sortie après changement des conditions initiales}
+		\label{fig6}
+		\end{center}
+		
+		    \textbf{Remarque:} On constate que le dépassement est réduit, il n'y a pas d'érreur de position or le temps de réponse augmente sur la sortie $h_1(t)$.\\ 
+		
+		\begin{center}
+		\includegraphics[scale=0.5]{errorcondi.PNG} 
+		\captionof{figure}{\textit Evolution de l'erreur d'estimation après changement des conditions initiales}
+		\label{fig7}
+		\end{center}		
+		
+		
+		\section{\textsc {Bruit sur la sortie mesurée}}
+		
+			\subsection{\textsc {Courbes de sortie et d'états estimés avec bruit de mesure}}
+		
+		\begin{center}
+		\includegraphics[scale=0.5]{bloc2.png} 
+		\captionof{figure}{\textit Schéma bloc SIMULINK avec observateur bruité}
+		\label{fig10}
+		\end{center}		
+		
+		\begin{center}
+		\includegraphics[scale=0.4]{bruit.png} 
+		\captionof{figure}{\textit Evolution de la sortie bruitée}
+		\label{fig8}
+		\end{center}		
+	    
+		\begin{center}
+		\includegraphics[scale=0.5]{chap5.png} 
+		\captionof{figure}{\textit Evolution des états estimés bruités}
+		\label{fig9}
+		\end{center}		    
+	    
+	    \paragraph{} Le bruit sinosoïdal $0.001 sin(10t)$ possède un effet direct sur la sortie mais aussi sur les état estimés en ajoutant une composante sinusoïdale qui va les faire diverger. 
+	    
+	    \subsection{\textsc {Calcul du nouvel observateur}}
+	    
+	    \paragraph{} Pour cette fois $ P{des} = \begin{bmatrix} 2P_2&2P_3 \end{bmatrix}$, on refait la même procédure que celle de la section 2.1.2 \label{calobs2} \hyperref[Annexe F]{Voir Annexe F}, le système devient alors:
+	    
+	    \begin{center}
+	 $\dot s(t)= \begin{bmatrix} -1.301670&0.010629\\-36.379600&-0.048646 \end{bmatrix} s(t) + \begin{bmatrix} -138\\-5223.66 \end{bmatrix} h_1(t)+ \begin{bmatrix} -9.0455 \times 10^{3} \\ -2.5679 \times 10^{5} \end{bmatrix} q_1(t)$\\[0.25cm]
+	 $\widehat{h}(t)=s(t)+ \begin{bmatrix} 139.30\\ 3954.60 \end{bmatrix} h_1(t)$\\[0.25cm]
+	 \end{center}
+	 
+	 \begin{center}
+		\includegraphics[scale=0.5]{sortie2.png} 
+		\captionof{figure}{\textit Evolution de la sortie bruitée du second observateur}
+		\label{fig13}
+		\end{center}	
+		
+		
+		\begin{center}
+		\includegraphics[scale=0.5]{chap2.png} 
+		\captionof{figure}{\textit Evolution des états estimés bruités du second observateur}
+		\label{fig14}
+		\end{center}	
+		
+		\paragraph{} En effet on constate que l'effet du bruit de mesure diminue en faisant converger le temps de réponse de l'observateur vers celui du système bouclé par retour d'état.

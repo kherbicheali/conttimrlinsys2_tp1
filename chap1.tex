@@ -23,7 +23,7 @@
 		\section{\textsc {La loi de commande par retour d'état}} 
 		
 		\begin{center}
-		%\includegraphics[scale=0.4]{bobb.png} 
+		\includegraphics[scale=0.3]{retouretat.PNG} 
 		\captionof{figure}{\textit Schéma SIMULINK du système en boucle fermée avec retour d'état}
 		\label{fig1}
 		\end{center}
@@ -71,16 +71,19 @@
 		\paragraph{} On sait que: $N=\frac{1}{C(-A+BK)^{-1}B+D}$ on obtient au final: $N=0.0108$,\label{N} \hyperref[Annexe C]{Voir Annexe C.}
 		
 		\begin{center}
-		%\includegraphics[scale=0.4]{bobb.png} 
+		\includegraphics[scale=0.5]{q1(t).PNG} 
 		\captionof{figure}{\textit Tracé de $q_1(t)$}
 		\label{fig2}
 		\end{center}
+
+			\textbf{Remarque:} On remarque de le signal $q_1(t)$ converge vers une valeur nulle, ce qui confirme le bon calcul de la valeur du pré-compensateur qui joue sur le comportement du régime permanent autrement dit sur l'erreur de position. 
 		
 		\begin{center}
-		%\includegraphics[scale=0.4]{bobb.png} 
+		\includegraphics[scale=0.5]{h1(t).PNG} 
 		\captionof{figure}{\textit Tracé de $h_1(t)$}
 		\label{fig3}
 		\end{center}
-		\textbf{Remarque:} 
+		
+		\textbf{Remarque:} M.GOUAISBAUT nous a imposé d'avoir un temps de réponse $t_{r}  \leqslant 98s$, les valeurs de $P_{des}$ choisies valident la condition mais on observe l'apparition d'un dépassement du à un zéro dominant qu'on ne pourra malheureusement pas enlever, or ça ne pose aucun problème pour le cahier des charges. 
 		
 		
